@@ -1,0 +1,97 @@
+---
+title: 'Editing'
+description: 'Enter insert mode to edit cell contents, manage rows, copy and paste, and undo changes.'
+---
+
+Sheets separates navigation from editing. You must enter insert mode before typing into a cell. All edits are tracked and can be undone or redone.
+
+## Entering insert mode
+
+From normal mode, use one of the following keys to begin editing the selected cell:
+
+| Key | Action |
+|-----|--------|
+| `i` | Edit the current cell (cursor at end) |
+| `I` | Edit the current cell (cursor at start) |
+| `c` | Clear the cell and start editing |
+
+## While in insert mode
+
+While editing a cell, these keys commit the edit and optionally move the selection:
+
+| Key | Action |
+|-----|--------|
+| `ESC` | Commit the edit and return to normal mode |
+| `Enter` | Commit and move down one row |
+| `Tab` | Commit and move right one column |
+| `Shift+Tab` | Commit and move left one column |
+| `ctrl+n` | Commit and move down one row |
+| `ctrl+p` | Commit and move up one row |
+
+The following keys edit the text within the current cell while in insert mode:
+
+| Key | Action |
+|-----|--------|
+| `ctrl+a` / `Home` | Move cursor to start of cell |
+| `ctrl+e` / `End` | Move cursor to end of cell |
+| `ctrl+b` / Left arrow | Move cursor left one character |
+| `ctrl+f` / Right arrow | Move cursor right one character |
+| `ctrl+k` | Delete from cursor to end of cell |
+| `ctrl+u` | Delete from cursor to start of cell |
+| `ctrl+w` | Delete word before cursor |
+| `Backspace` | Delete character before cursor |
+| `ctrl+d` / `Delete` | Delete character at cursor |
+
+## Row and column operations
+
+These commands work from normal mode and insert a new row or column, placing the cursor in the new cell ready for input:
+
+| Key | Action |
+|-----|--------|
+| `o` | Insert a row below the current row and start editing |
+| `O` | Insert a row above the current row and start editing |
+| `dd` | Delete the current row |
+| `a` | Insert a column after the current column and start editing |
+| `A` | Insert a column before the current column and start editing |
+
+## Copy and paste
+
+| Key | Action |
+|-----|--------|
+| `y` | Copy the current cell |
+| `yy` | Yank the current row (or multiple rows with a count prefix) |
+| `x` | Cut the current cell |
+| `p` | Paste from the register into the current cell |
+
+### Named registers
+
+Sheets supports named registers for storing multiple independent clipboard entries. Prefix a yank, cut, or paste command with `"` followed by a letter to use a named register.
+
+```text
+"ayy   — yank current row into register a
+"ap    — paste from register a
+"bx    — cut current cell into register b
+```
+
+Any lowercase letter (`a`–`z`) is a valid register name. The default (unnamed) register is used when no prefix is given.
+
+## Cell formatting
+
+You can apply text formatting to cells without entering insert mode:
+
+| Key | Action |
+|-----|--------|
+| `ctrl+b` | Toggle **bold** on the current cell |
+
+Bold wraps the cell's stored value in `*...*` markers (e.g., `*Total*`). The markers are stripped from the display but preserved in the CSV file. Sheets also recognizes `_..._` for underline and `/.../ ` for italic when values are entered manually with those markers.
+
+## Undo and redo
+
+| Key | Action |
+|-----|--------|
+| `u` | Undo the last change |
+| `ctrl+r` | Redo |
+| `U` | Redo (alternative, Helix-style) |
+| `.` | Repeat the last change |
+
+Undo and redo track structural changes including cell edits, row insertions, row deletions, cuts, and pastes.

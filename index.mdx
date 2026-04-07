@@ -1,97 +1,69 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Sheets — Spreadsheets in Your Terminal"
+description: "A terminal-based spreadsheet tool with vim-style keybindings for editing CSV and TSV files without leaving your terminal."
 ---
 
-## Setting up
+Sheets brings the power of a spreadsheet editor directly to your terminal. Open CSV and TSV files, navigate cells with vim-style keybindings, write formulas, and script bulk edits from the command line — all without leaving your workflow.
 
-Get your documentation site up and running in minutes.
-
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
-
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={2}>
+  <Card title="Installation" icon="download" href="/installation">
+    Install Sheets via Go or download a prebuilt binary for your platform.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Open your first spreadsheet and get editing in under a minute.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Keyboard reference" icon="keyboard" href="/navigation">
+    Master vim-style navigation, search, marks, and jump lists.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
+  <Card title="Formulas" icon="function" href="/formulas">
+    Use SUM, AVG, MIN, MAX, and COUNT in your spreadsheet cells.
   </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## What you can do with Sheets
 
-Everything you need to create world-class documentation.
+<CardGroup cols={3}>
+  <Card title="Edit interactively" icon="table-cells">
+    Open any CSV or TSV file and navigate cells with familiar vim motions.
+  </Card>
+  <Card title="Query from the CLI" icon="terminal">
+    Read or write individual cells and ranges without opening the TUI.
+  </Card>
+  <Card title="Write formulas" icon="calculator">
+    Compute sums, averages, and counts directly inside spreadsheet cells.
+  </Card>
+  <Card title="Visual selection" icon="object-group">
+    Select ranges visually and insert formulas over them in one step.
+  </Card>
+  <Card title="Pipe from stdin" icon="pipe-section">
+    Stream CSV data into Sheets from any other command-line tool.
+  </Card>
+  <Card title="Undo everything" icon="rotate-left">
+    Full undo and redo history keeps your edits reversible.
+  </Card>
+</CardGroup>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+## Get started in seconds
 
-## Need inspiration?
+<Steps>
+  <Step title="Install Sheets">
+    ```bash
+    go install github.com/maaslalani/sheets@main
+    ```
+  </Step>
+  <Step title="Open a CSV file">
+    ```bash
+    sheets budget.csv
+    ```
+  </Step>
+  <Step title="Navigate with vim keys">
+    Use `h`, `j`, `k`, `l` to move between cells. Press `i` to start editing a cell. Press `ESC` to return to normal mode.
+  </Step>
+  <Step title="Save and quit">
+    Press `:` to open the command prompt, then type `wq` and press `Enter` to save and exit.
+  </Step>
+</Steps>
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<Note>
+  Sheets supports both CSV and TSV files. The file format is detected automatically from the file extension (`.csv` or `.tsv`).
+</Note>

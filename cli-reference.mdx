@@ -1,0 +1,126 @@
+---
+title: "CLI reference"
+description: "Complete reference for the sheets command-line interface, including all usage modes and flags."
+---
+
+## Synopsis
+
+```
+sheets [file.csv]
+sheets [file.csv] [cell|range|cell=value|range=value]...
+sheets < input.csv
+sheets -h | --help
+sheets -v | --version
+```
+
+## Flags
+
+| Flag              | Description                        |
+| ----------------- | ---------------------------------- |
+| `-h`, `--help`    | Show the help text and exit.       |
+| `-v`, `--version` | Show the current version and exit. |
+
+## Modes
+
+### Interactive TUI
+
+```bash
+sheets budget.csv
+```
+
+Opens the full-screen TUI editor for the given file. You can navigate, edit cells, write formulas, and save — all from the terminal.
+
+If the file does not exist, Sheets creates a new empty spreadsheet. The file is written to the given path the first time you save with `:w`.
+
+If no file argument is given and stdin is a pipe, Sheets loads the CSV data from stdin and opens the TUI interactively.
+
+### Query mode
+
+Read cell values from a file without opening the TUI. Sheets prints the result to stdout and exits.
+
+**Single cell:**
+
+```bash
+sheets budget.csv B9
+```
+
+**Range:**
+
+```bash
+sheets budget.csv B1:B3
+```
+
+Output for a range is one value per line (one row per line, columns separated by the file's delimiter).
+
+**Multiple references:**
+
+You can pass comma-separated references to query multiple cells or ranges at once:
+
+```bash
+sheets budget.csv A1,B1
+```
+
+### Modify mode
+
+Set cell values from the command line. Sheets writes the changes back to the file in-place and exits without opening the TUI.
+
+**Single cell assignment:**
+
+```bash
+sheets budget.csv B7=10
+```
+
+**Multiple assignments:**
+
+```bash
+sheets budget.csv B7=10 B8=20
+```
+
+**Range assignment:**
+
+```bash
+sheets budget.csv B1:B3=100
+```
+
+<Note>
+  When you assign a single value to a range, Sheets broadcasts that value to every cell in the range. If the value is a formula, each cell receives a copy of the formula with cell references rewritten using relative offsets — the same way copying a formula in a spreadsheet application adjusts its references.
+</Note>
+
+### Stdin mode
+
+Pipe CSV data into Sheets to load it into the interactive TUI:
+
+```bash
+cat budget.csv | sheets
+```
+
+You can also use a here-string:
+
+```bash
+sheets <<< "ID,Name,Age
+1,Alice,24
+2,Bob,32"
+```
+
+<Note>
+  Stdin mode requires a TTY for interactive use. If no TTY is available (for example, in a non-interactive script), Sheets exits with an error.
+</Note>
+
+## Examples
+
+```bash
+# Open a file in the TUI
+sheets budget.csv
+
+# Read a single cell value
+sheets budget.csv B9
+
+# Read a range of cells
+sheets budget.csv B1:B3
+
+# Set multiple cells and save
+sheets budget.csv B7=10 B8=20
+
+# Load CSV from stdin
+cat budget.csv | sheets
+```

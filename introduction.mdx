@@ -1,0 +1,57 @@
+---
+title: 'Introduction'
+description: 'Sheets is a terminal-based spreadsheet editor for CSV and TSV files.'
+---
+
+Sheets is a terminal UI (TUI) application that lets you view and edit spreadsheet data directly in your terminal. It reads and writes standard CSV and TSV files, supports built-in formulas, and can be driven entirely from the command line without opening the interactive editor.
+
+## Key features
+
+<CardGroup cols={2}>
+  <Card title="Interactive TUI editor" icon="table">
+    A full-screen terminal spreadsheet with vim-style keybindings for navigation, editing, and selection.
+  </Card>
+  <Card title="CSV and TSV support" icon="file-csv">
+    Open, edit, and save standard comma-separated and tab-separated files. Pipe data in from stdin too.
+  </Card>
+  <Card title="Built-in formulas" icon="function">
+    Calculate values with `SUM`, `AVG`, `MIN`, `MAX`, and `COUNT` directly inside cells.
+  </Card>
+  <Card title="Headless CLI mode" icon="terminal">
+    Query or set cell values from the command line without launching the TUI — useful for scripting and automation.
+  </Card>
+  <Card title="Visual selection mode" icon="object-group">
+    Select ranges of cells visually, then insert a formula after the selection with a single keystroke.
+  </Card>
+  <Card title="Undo, redo, and repeat" icon="rotate-left">
+    Full undo and redo history. Press `.` to repeat the last change, just like in Vim.
+  </Card>
+  <Card title="Search and jump" icon="magnifying-glass">
+    Search forward and backward through cell content, set named marks, and navigate the jump list with `ctrl+o` / `ctrl+i`.
+  </Card>
+  <Card title="Mouse navigation" icon="arrow-pointer">
+    Click any cell to move the cursor directly, without leaving the keyboard.
+  </Card>
+</CardGroup>
+
+## Two ways to use Sheets
+
+**Interactive TUI** — launch with a file path (or no arguments) to open the full-screen editor:
+
+```bash
+sheets budget.csv
+```
+
+**Headless CLI** — pass a file and one or more cell references or assignments to query or modify data without opening the editor:
+
+```bash
+# Read a cell
+sheets budget.csv B9
+
+# Set two cells
+sheets budget.csv B7=10 B8=20
+```
+
+The CLI mode writes changes back to the file and exits immediately, making it easy to script against CSV data.
+
+Ready to get going? Follow the [Quickstart](/quickstart) to edit your first spreadsheet in under a minute.

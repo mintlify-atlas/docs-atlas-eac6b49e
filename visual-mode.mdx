@@ -1,0 +1,56 @@
+---
+title: 'Visual mode'
+description: 'Select ranges of cells or entire rows to copy, cut, or insert formulas.'
+---
+
+Visual mode lets you select a range of cells before acting on them. Use it to copy or cut multi-cell regions, or to generate a formula that references the selected range.
+
+## Starting a selection
+
+| Key | Action |
+|-----|--------|
+| `v` | Start cell selection at the current cell |
+| `V` | Start row selection (selects entire rows) |
+
+The anchor is set at the cell where you press `v` or `V`. As you move the cursor, the selection expands between the anchor and the current cell.
+
+## Extending and exiting
+
+| Key | Action |
+|-----|--------|
+| `h` / `j` / `k` / `l` | Extend the selection in that direction |
+| `ESC` | Exit visual mode and return to normal mode |
+
+All standard [navigation](/navigation) keys work in visual mode, including `H`, `M`, `L`, `0`, `^`, `$`, `ctrl+u`, `ctrl+d`, `gg`, `G`, and count prefixes.
+
+## Acting on the selection
+
+| Key | Action |
+|-----|--------|
+| `y` | Copy the selected cells into the register |
+| `Y` | Copy the cell reference (e.g., `B1:B8`) of the selection as text |
+| `x` | Cut the selected cells (clears them and stores in register) |
+| `=` | Insert a formula referencing the selected range |
+| `ctrl+b` | Toggle **bold** formatting on all cells in the selection |
+
+After `y`, `Y`, or `x`, visual mode exits automatically.
+
+<Tip>
+Press `V` to start row selection, then extend it by moving `j`/`k`, and press `y` to yank the selected rows into the register. Paste them elsewhere with `p`.
+</Tip>
+
+## Inserting a formula from a selection
+
+Pressing `=` in visual mode exits visual mode and opens insert mode on the cell immediately below the selection, pre-filled with a formula stub:
+
+```text
+=(B1:B8)
+```
+
+The cursor is placed after the `=` sign, before the opening parenthesis, so you can type the function name directly. For example, typing `SUM` produces:
+
+```text
+=SUM(B1:B8)
+```
+
+The range in the formula is derived from the bounds of the selection at the time `=` is pressed. The cell reference uses the top-left and bottom-right corners of the selected region.

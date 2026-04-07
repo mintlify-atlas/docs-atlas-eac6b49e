@@ -1,0 +1,68 @@
+{
+  "projectType": "cli-tool",
+  "projectName": "Sheets",
+  "projectDescription": "A terminal-based spreadsheet tool with vim-style keybindings for editing CSV and TSV files in your terminal.",
+  "theme": "luma",
+  "primaryColor": "#7c7c7c",
+  "lightColor": "#0a0a0a",
+  "darkColor": "#c7c7c7",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get Started",
+        "pages": [
+          "introduction",
+          "installation",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "Using Sheets",
+        "pages": [
+          "navigation",
+          "editing",
+          "command-mode",
+          "visual-mode"
+        ]
+      },
+      {
+        "group": "Reference",
+        "pages": [
+          "formulas",
+          "cli-reference",
+          "file-formats"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Interactive TUI spreadsheet editor in the terminal",
+    "Vim-style keybindings for navigation and editing",
+    "CSV and TSV file support",
+    "Formula support with SUM, AVG, MIN, MAX, COUNT functions",
+    "Cell range queries and assignments from the command line",
+    "Visual selection mode with formula insertion",
+    "Undo/redo and repeat last change",
+    "Search forward and backward with marks and jump list",
+    "Command mode with :w, :q, :e, :goto commands",
+    "Mouse click navigation support"
+  ],
+  "publicApiSurface": [
+    "sheets [file.csv] — Launch interactive TUI",
+    "sheets [file.csv] [cell] — Query a cell value (e.g. B9)",
+    "sheets [file.csv] [range] — Query a range (e.g. B1:B3)",
+    "sheets [file.csv] [cell=value] — Set a cell value (e.g. B7=10)",
+    "sheets < input.csv — Load CSV from stdin",
+    "sheets -h / --help — Show help",
+    "sheets -v / --version — Show version",
+    ":w [path] — Save file",
+    ":e [path] — Open another file",
+    ":q / :wq — Quit",
+    ":goto <cell> — Jump to cell",
+    "=SUM(range) — Sum formula",
+    "=AVG(range) — Average formula",
+    "=MIN(range) — Minimum formula",
+    "=MAX(range) — Maximum formula",
+    "=COUNT(range) — Count formula"
+  ]
+}

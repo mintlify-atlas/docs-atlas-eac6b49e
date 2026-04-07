@@ -1,0 +1,71 @@
+---
+title: "File formats"
+description: "How Sheets reads and writes CSV and TSV files, including size limits and column labeling."
+---
+
+Sheets reads and writes two delimited text formats: CSV (comma-separated values) and TSV (tab-separated values). The format is detected automatically from the file extension — no configuration needed.
+
+## Format detection
+
+| Extension | Delimiter |
+| --------- | --------- |
+| `.csv`    | `,` comma |
+| `.tsv`    | `\t` tab  |
+
+Any file without a `.tsv` extension is treated as CSV.
+
+When you save with `:w path.csv` or `:w path.tsv`, the output delimiter matches the extension of the target path.
+
+## Sample files
+
+**CSV:**
+
+```csv
+ID,Name,Budget
+1,Alice,1200
+2,Bob,950
+3,Charlie,810
+```
+
+**TSV:**
+
+```tsv
+ID	Name	Budget
+1	Alice	1200
+```
+
+<Tip>
+  You can load any CSV or TSV file into Sheets without specifying its path as an argument by piping it through stdin: `cat file.csv | sheets`. This is useful when you want to inspect data from a command that produces CSV output.
+</Tip>
+
+## Limits
+
+| Limit               | Value                    |
+| ------------------- | ------------------------ |
+| Maximum rows        | 50,000                   |
+| Maximum columns     | 52 (A–Z, then AA–AZ)     |
+| Default rows shown  | 999                      |
+
+Sheets reads the entire file into memory when opening. Files with more than 50,000 rows cannot be opened.
+
+## Column labels
+
+Columns are labeled with one or two letters:
+
+- **A–Z** — the first 26 columns
+- **AA–AZ** — columns 27–52
+
+Rows are 1-indexed. The cell in the first column of the first row is `A1`.
+
+## Reading files
+
+Sheets loads the full file into memory on open. Each row is parsed according to the detected delimiter. Rows may have varying numbers of fields — trailing empty fields at the end of a row are trimmed when saving.
+
+## Writing files
+
+Use the command prompt to save:
+
+- `:w` — save to the current file path
+- `:w path.csv` — save to a new path (and switch the current path to the new file)
+
+The saved file uses the delimiter that matches the file extension of the target path. A file saved as `.tsv` uses tab delimiters; all other extensions use commas.

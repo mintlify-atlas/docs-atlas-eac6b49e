@@ -1,0 +1,85 @@
+---
+title: 'Navigation'
+description: 'Move around your spreadsheet using Vim-style keybindings in normal mode.'
+---
+
+Sheets starts in normal mode. In this mode, your keystrokes control the cursor and viewport — no text is inserted into cells. Use the keybindings below to move efficiently across rows and columns.
+
+## Basic movement
+
+| Key | Action |
+|-----|--------|
+| `h` | Move left |
+| `j` | Move down |
+| `k` | Move up |
+| `l` | Move right |
+
+Arrow keys also work for basic movement.
+
+## Jumping
+
+| Key | Action |
+|-----|--------|
+| `gg` | Jump to top (row 1, column A) |
+| `G` | Jump to bottom row |
+| `5G` | Jump to row 5 |
+| `gB9` | Jump to cell B9 |
+| `0` | Jump to first column |
+| `^` | Jump to first non-empty column in the row |
+| `$` | Jump to last non-empty column in the row |
+| `H` | Jump to top visible row |
+| `M` | Jump to middle visible row |
+| `L` | Jump to bottom visible row |
+| `ctrl+u` | Move half a page up |
+| `ctrl+d` | Move half a page down |
+
+<Tip>
+Most movement commands accept a count prefix. For example, `5G` jumps to row 5, `3j` moves down 3 rows, and `10l` moves right 10 columns.
+</Tip>
+
+## View alignment
+
+These commands scroll the viewport without changing the selected cell, aligning the current row relative to the visible window.
+
+| Key | Action |
+|-----|--------|
+| `zt` | Align current row to top of window |
+| `zz` | Align current row to middle of window |
+| `zb` | Align current row to bottom of window |
+
+## Search
+
+| Key | Action |
+|-----|--------|
+| `/` | Search forward |
+| `?` | Search backward |
+| `n` | Jump to next search result |
+| `N` | Jump to previous search result |
+
+Search matches against both raw cell values and displayed (formula-evaluated) values. The search is case-insensitive.
+
+## Marks and jump list
+
+Marks let you bookmark a cell and return to it later. The jump list records every significant position change so you can retrace your steps.
+
+| Key | Action |
+|-----|--------|
+| `ma` | Set mark `a` at the current cell |
+| `'a` | Jump to mark `a` |
+| `ctrl+o` | Jump backward in the jump list |
+| `ctrl+i` | Jump forward in the jump list |
+
+Any lowercase letter can be used as a mark name (e.g., `mb`, `mz`). Jumping to a non-existent mark shows an error in the status bar.
+
+## Mouse
+
+Click any visible cell to move the selection to it. If the spreadsheet is in insert or visual mode when you click, it exits that mode first before moving the cursor.
+
+## Quit
+
+| Key | Action |
+|-----|--------|
+| `q` | Quit |
+| `ctrl+c` | Quit |
+
+To save before quitting, use the [`:wq` or `:x` command](/command-mode).

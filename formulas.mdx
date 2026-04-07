@@ -1,0 +1,177 @@
+---
+title: "Formulas"
+description: "Use built-in aggregate functions and arithmetic expressions in spreadsheet cells."
+---
+
+Any cell value that begins with `=` is treated as a formula. Sheets evaluates the formula and displays the result in the cell. The raw formula is shown in the status bar when the cell is active.
+
+```
+=SUM(B1:B8)
+=AVG(B1:B8)
+=MIN(A1:A10)
+=MAX(A1:A10)
+=COUNT(A1:A10)
+=B1+B2
+=A1*1.1
+=SUM(B)
+=SUM(B1:B8) + SUM(C1:C8)
+```
+
+## Aggregate functions
+
+Sheets supports five built-in aggregate functions. All function names are case-insensitive.
+
+<AccordionGroup>
+  <Accordion title="SUM — sum of a range">
+    Adds all numeric values in the given range. Non-numeric and blank cells are skipped.
+
+    **Syntax:** `=SUM(range)`
+
+    **Examples:**
+    ```
+    =SUM(B1:B8)
+    =SUM(A1:C3)
+    =SUM(B)
+    ```
+
+    **Notes:** Returns `0` for an empty range. See [column and row shortcuts](#column-and-row-shortcuts) for the `=SUM(B)` shorthand.
+  </Accordion>
+
+  <Accordion title="AVG — average of a range">
+    Computes the arithmetic mean of all numeric values in the range. Non-numeric and blank cells are excluded from both the sum and the count.
+
+    **Syntax:** `=AVG(range)`
+
+    **Examples:**
+    ```
+    =AVG(B1:B8)
+    =AVG(A1:A10)
+    ```
+
+    **Notes:** Produces `#ERR` if the range contains no numeric values.
+  </Accordion>
+
+  <Accordion title="MIN — minimum value in a range">
+    Returns the smallest numeric value in the range.
+
+    **Syntax:** `=MIN(range)`
+
+    **Examples:**
+    ```
+    =MIN(A1:A10)
+    =MIN(B1:B5)
+    ```
+
+    **Notes:** Produces `#ERR` if the range contains no numeric values.
+  </Accordion>
+
+  <Accordion title="MAX — maximum value in a range">
+    Returns the largest numeric value in the range.
+
+    **Syntax:** `=MAX(range)`
+
+    **Examples:**
+    ```
+    =MAX(A1:A10)
+    =MAX(B1:B5)
+    ```
+
+    **Notes:** Produces `#ERR` if the range contains no numeric values.
+  </Accordion>
+
+  <Accordion title="COUNT — count of numeric values">
+    Counts how many cells in the range contain a numeric value. Blank and non-numeric cells are not counted.
+
+    **Syntax:** `=COUNT(range)`
+
+    **Examples:**
+    ```
+    =COUNT(A1:A10)
+    =COUNT(B1:B8)
+    ```
+
+    **Notes:** Returns `0` for an empty range or a range with no numeric values.
+  </Accordion>
+</AccordionGroup>
+
+## Arithmetic operators
+
+You can use standard arithmetic operators between cell references, ranges, function calls, and literal numbers. Parentheses control evaluation order.
+
+| Operator | Description         | Example      |
+| -------- | ------------------- | ------------ |
+| `+`      | Addition            | `=B1+B2`     |
+| `-`      | Subtraction         | `=B1-B2`     |
+| `*`      | Multiplication      | `=A1*1.1`    |
+| `/`      | Division            | `=C1/B1`     |
+| `-value` | Unary negation      | `=-A1`       |
+| `(...)`  | Grouping            | `=(A1+A2)*2` |
+
+Operator precedence follows standard arithmetic rules: `*` and `/` before `+` and `-`. Use parentheses to override.
+
+### Examples
+
+```
+=B1+B2
+=A1*2
+=C1/B1
+=SUM(B1:B8) + SUM(C1:C8)
+=(A1+A2) * B1
+```
+
+## Cell references
+
+Reference any cell by its column letter and row number. Column labels run from `A` to `Z`, then `AA` to `AZ` (52 columns total). Rows are 1-indexed.
+
+```
+=B9
+=A1
+=AZ50
+```
+
+## Range references
+
+A range spans two cell references separated by `:`. The range covers every cell in the rectangular region between the two corners, inclusive.
+
+```
+=SUM(B1:B8)
+=AVG(A1:C3)
+```
+
+## Column and row shortcuts
+
+Inside aggregate functions, you can reference an entire column or a row span without spelling out exact cell addresses.
+
+**Column until current row:** Use a bare column label (e.g., `B`) to include all cells in that column above the current row. This is useful for running totals.
+
+```
+=SUM(B)
+```
+
+If this formula is in cell `B9`, it sums `B1` through `B8`.
+
+**Row range:** Use two row numbers separated by `:` to cover the current column across a row span.
+
+```
+=SUM(1:5)
+```
+
+If this formula is in column `C`, it sums `C1` through `C5`.
+
+## Error values
+
+| Value    | Meaning                                                                     |
+| -------- | --------------------------------------------------------------------------- |
+| `#ERR`   | The formula could not be evaluated (e.g., division by zero, invalid range). |
+| `#CYCLE` | The formula references itself directly or indirectly (circular reference).  |
+| `#REF!`  | A cell reference in a formula points outside the valid grid (e.g., after a row or column deletion shifted references out of bounds). |
+
+<Warning>
+  A circular reference occurs when a formula depends on its own cell, directly or through a chain of other formulas. For example, if `A1` contains `=A1+1`, the cell displays `#CYCLE`. Break the cycle by editing the formula to reference a different cell.
+</Warning>
+
+## Dollar-prefixed numbers
+
+<Note>
+  Cell values that begin with `$` are treated as numeric when used in formulas. For example, a cell containing `$1200` is read as the number `1200` in any formula that references it. This lets you store currency values without needing to strip the prefix manually.
+</Note>

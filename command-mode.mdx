@@ -1,0 +1,43 @@
+---
+title: 'Command mode'
+description: 'Run file and navigation commands using the Vim-style command prompt.'
+---
+
+Press `:` in normal mode to open the command prompt at the bottom of the screen. Type a command and press `Enter` to execute it, or `ESC` to cancel.
+
+## Command reference
+
+| Command | Description |
+|---------|-------------|
+| `:w` | Save the current file |
+| `:w path.csv` | Save to a new file path |
+| `:e path.csv` | Open another CSV or TSV file |
+| `:q` | Quit |
+| `:q!` | Force quit |
+| `:wq` or `:x` | Save and quit |
+| `:goto B9` or `:B9` | Jump to a specific cell |
+| `:help` or `:?` | Show a command summary in the status bar |
+
+Cell references passed to `:goto` (or directly as `:B9`) are case-insensitive. The jump is recorded in the jump list, so you can return with `ctrl+o`.
+
+<Note>
+If a command fails — for example, writing a file without a path or opening a file that does not exist — the error message is displayed in the status bar in red. Successful messages appear in the default status bar color.
+</Note>
+
+## Editing the command line
+
+While the command prompt is open, use these keys to edit what you have typed:
+
+| Key | Action |
+|-----|--------|
+| `ctrl+a` / `Home` | Move cursor to start of line |
+| `ctrl+e` / `End` | Move cursor to end of line |
+| `ctrl+b` / Left arrow | Move cursor left one character |
+| `ctrl+f` / Right arrow | Move cursor right one character |
+| `ctrl+k` | Delete from cursor to end of line |
+| `ctrl+u` | Delete from cursor to start of line |
+| `ctrl+w` | Delete word before cursor |
+| `Backspace` | Delete character before cursor |
+| `ESC` | Cancel and return to normal mode |
+
+Pressing `Backspace` when the command buffer is empty also cancels the prompt and returns to normal mode.

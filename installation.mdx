@@ -1,0 +1,69 @@
+---
+title: 'Installation'
+description: 'Install Sheets on Linux, macOS, or Windows.'
+---
+
+Sheets ships as a single static binary with no runtime dependencies. Choose the method that suits your setup.
+
+<CodeGroup>
+
+```bash Go install
+go install github.com/maaslalani/sheets@main
+```
+
+```bash Binary download
+# Download the latest release for your platform from:
+# https://github.com/maaslalani/sheets/releases
+#
+# Example for Linux x86_64:
+curl -L https://github.com/maaslalani/sheets/releases/latest/download/sheets_Linux_x86_64.tar.gz \
+  | tar -xz sheets
+sudo mv sheets /usr/local/bin/
+```
+
+</CodeGroup>
+
+## Install with Go
+
+<Steps>
+  <Step title="Install Go">
+    Sheets requires Go to be installed on your system. Download it from [go.dev/dl](https://go.dev/dl) or use your system package manager.
+
+    Verify Go is available:
+
+    ```bash
+    go version
+    ```
+  </Step>
+  <Step title="Install Sheets">
+    Run the following command to download, build, and install the `sheets` binary into your `$GOPATH/bin`:
+
+    ```bash
+    go install github.com/maaslalani/sheets@main
+    ```
+
+    <Note>
+      Make sure `$GOPATH/bin` (usually `~/go/bin`) is in your `PATH` so the `sheets` command is available system-wide.
+    </Note>
+  </Step>
+  <Step title="Verify the installation">
+    Confirm Sheets is installed and accessible:
+
+    ```bash
+    sheets --version
+    ```
+
+    You should see output like `sheets v0.1.0` or `sheets dev` if built from source.
+  </Step>
+</Steps>
+
+## Download a binary
+
+Pre-built binaries for Linux, macOS, and Windows are available on the [GitHub releases page](https://github.com/maaslalani/sheets/releases).
+
+1. Go to [github.com/maaslalani/sheets/releases](https://github.com/maaslalani/sheets/releases).
+2. Download the archive for your operating system and architecture.
+3. Extract the `sheets` binary and place it somewhere on your `PATH`.
+4. Run `sheets --version` to confirm it works.
+
+Archive formats: `.tar.gz` for Linux and macOS, `.zip` for Windows.
